@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.message-textarea {
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  color: #495057;
+  padding: 10px;
+  font-size: 14px;
+  resize: vertical;
+  width: 100%; /* Делаем поле шире */
+}
+
+.message-textarea:focus {
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Убираем округлые края у всех кнопок */
+button, .button {
+  border-radius: 0 !important;
+}
+
+/* Убираем округлые края у всех полей ввода */
+input, textarea, select {
+  border-radius: 0 !important;
+}
+
+/* Стили для боковой панели */
+.sidebar-button {
+  @apply w-full justify-start text-left font-normal text-gray-700 hover:bg-gray-100;
+}
+
+/* Стили для активной кнопки в боковой панели */
+.sidebar-button-active {
+  @apply bg-gray-200;
+}

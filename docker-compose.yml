@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://username:password@db:5432/crm
+      - SECRET_KEY=your_secret_key_here
+      - FLASK_ENV=development
+      - API_BASE_URL=http://localhost:8000/api
+      - CORS_ORIGINS=http://localhost:3000,http://localhost:3001
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - app-network
+
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=crm
+      - POSTGRES_USER=username
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - crm_crm_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U username -d crm"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app-network
+
+volumes:
+  crm_crm_postgres_data:
+
+networks:
+  app-network:
+    driver: bridge

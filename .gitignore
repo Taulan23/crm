@@ -1,0 +1,4 @@
+node_modules/
+node_modules/ # Prevent node_modules from being tracked
+node_modules/.cache/
+node_modules
